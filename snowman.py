@@ -22,5 +22,13 @@ WORDS = ["python", "git", "github", "snowman", "meltdown"]
 # Entry point - only runs when this file is executed directly (not imported)
 if __name__ == "__main__":
 
-    # Start the game
-    game_logic.play_game()
+    while True:
+        # Start the game
+        game_logic.play_game()
+        play_again = input("Please enter y to play again or any other key to exit: ")
+
+        if play_again.casefold() ==  "y".casefold():
+            continue
+        else:
+            print("Bye!")
+            break
