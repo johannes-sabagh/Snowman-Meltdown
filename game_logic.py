@@ -64,7 +64,14 @@ def play_game():
     # Prompt user for guesses as long as the mistakes are less than 4 (the number of art stages)
     # Main game loop - continue until win or loss condition is met
     while mistakes <= len(secret_word):
-        guess = input("Guess a letter: ").lower()
+
+        # validate the input to accept only single letters
+        while True:
+            guess = input("Guess a letter: ").lower()
+            if len(guess) == 1 and guess.isalpha():
+                break
+            else:
+                print("please enter single letter")
         if guess in secret_word:
             guessed_letters.append(guess)
             display_game_state(mistakes, secret_word, guessed_letters)
