@@ -88,3 +88,4 @@ def play_game():
             if mistakes == len(ascii_art.STAGES):
                 print(f"Game Over! The word was: {secret_word}")
                 break
+
