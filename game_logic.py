@@ -61,9 +61,9 @@ def play_game():
     # Display the initial game state.
     display_game_state(mistakes, secret_word, guessed_letters)
 
-    # Prompt user for guesses as long as the mistakes are less than 4 (the number of art stages)
+    # Prompt user for guesses as long as the mistakes are less than 8 (the number of art stages)
     # Main game loop - continue until win or loss condition is met
-    while mistakes <= len(secret_word):
+    while mistakes <= len(ascii_art.STAGES):
 
         # validate the input to accept only single letters
         while True:
@@ -72,17 +72,24 @@ def play_game():
                 break
             else:
                 print("please enter single letter")
+
+        # prevent duplicate correct letters
+        if guess in guessed_letters:
+            print(f"You already guessed ({guess}). Try a different letter!")
+            continue
+
         if guess in secret_word:
             guessed_letters.append(guess)
             display_game_state(mistakes, secret_word, guessed_letters)
 
             # Check for win condition - all unique letters have been guessed
-            if len(guessed_letters) == len(secret_word):
+            if set(guessed_letters) == set(secret_word):
                 print("Congratulations, you saved the snowman!")
                 break
         else:
-            display_game_state(mistakes, secret_word, guessed_letters)
             mistakes += 1
+            display_game_state(mistakes, secret_word, guessed_letters)
+
 
             # Check for loss condition - too many mistakes (snowman fully melted)
             if mistakes == len(ascii_art.STAGES):
